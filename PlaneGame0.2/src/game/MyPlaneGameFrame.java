@@ -68,7 +68,7 @@ public class MyPlaneGameFrame extends Frame {
                 g.setColor(Color.red);
                 Font f = new Font("宋体", Font.BOLD,40);
                 g.setFont(f);
-                g.drawString("时间:" + period + "秒，",(int)plane.x,(int)plane.y);
+                g.drawString("时间:" + period + "秒",(int)plane.x,(int)plane.y);
             }
 
 
