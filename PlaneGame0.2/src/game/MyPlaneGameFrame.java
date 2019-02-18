@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 
 /**
  * @Auther: yinw_puzh
@@ -20,10 +21,15 @@ public class MyPlaneGameFrame extends Frame {
     Plane plane = new Plane(planeImg,250,250);
     Shell[] shells = new Shell[50];
 
+    Explode bao;
+    Date startTime = new Date();
+    Date endTime;
+    int period;//游戏持续时间
 
     @Override
     public void paint(Graphics g) { //自动调用 g变量相当于一只画笔
         super.paint(g);
+        Color c = g.getColor();
 
 //        Color c = g.getColor();
 //        Font f = g.getFont();
@@ -49,9 +55,26 @@ public class MyPlaneGameFrame extends Frame {
             if (peng) {
                 //System.out.println("碰撞");
                 plane.live = false;
+                if(bao==null){
+                    bao = new Explode(plane.x,plane.y);
+
+                    endTime = new Date();
+                    period = (int)(endTime.getTime() - startTime.getTime())/1000;
+                }
+                bao.draw(g);
             }
 
+            if(!plane.live){
+                g.setColor(Color.red);
+                Font f = new Font("宋体", Font.BOLD,40);
+                g.setFont(f);
+                g.drawString("时间:" + period + "秒，",(int)plane.x,(int)plane.y);
+            }
+
+
+
         }//画出炮弹 并且检测碰撞
+        g.setColor(c);
     }
 
 
